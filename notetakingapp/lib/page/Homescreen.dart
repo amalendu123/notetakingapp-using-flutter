@@ -57,6 +57,13 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 
+  void deleteTask(int index) {
+    setState(() {
+      db.notes.removeAt(index);
+    });
+    db.updateDataBase();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,6 +84,7 @@ class _HomescreenState extends State<Homescreen> {
             return Notetile(
               titleName: db.notes[index][0],
               notess1: db.notes[index][1],
+              deleteFunction: (context) => deleteTask(index),
             );
           }),
     );
