@@ -32,10 +32,15 @@ class _HomescreenState extends State<Homescreen> {
   }
 
   final _controller = TextEditingController();
+  final _notescontroller = TextEditingController();
   void saveNewTask() {
-    setState(() {});
+    setState(() {
+      db.notes.add([_controller.text, _notescontroller.text]);
+    });
     Navigator.of(context).pop();
     db.updateDataBase();
+    _controller.clear();
+    _notescontroller.clear();
   }
 
   void createNewTask() {
@@ -43,6 +48,7 @@ class _HomescreenState extends State<Homescreen> {
       context: context,
       builder: (context) {
         return DialogBox(
+          notescontroller: _notescontroller,
           controller: _controller,
           onSave: saveNewTask,
           onCancel: () => Navigator.of(context).pop(),
@@ -69,7 +75,8 @@ class _HomescreenState extends State<Homescreen> {
           itemCount: db.notes.length,
           itemBuilder: (context, index) {
             return Notetile(
-              titleName: db.notes[index],
+              titleName: db.notes[index][0],
+              notess1: db.notes[index][1],
             );
           }),
     );

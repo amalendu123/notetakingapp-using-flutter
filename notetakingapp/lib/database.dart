@@ -8,7 +8,9 @@ class NoteDataBase {
 
   // run this method if this is the 1st time ever opening this app
   void createInitialData() {
-    notes = ["amalendu"];
+    notes = [
+      ["first note ", "this is my first note "],
+    ];
   }
 
   // load the data from database
